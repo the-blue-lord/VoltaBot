@@ -1,0 +1,34 @@
+# __________________________________________________
+#
+# COMMANDS CONFIGURATION, SEE BELOW FOR FURTHER INFORMATION
+# 
+# <command name>:
+#   description: <the description of the command> (string)
+#   test: <whether the command should be shown or not> (false/true)
+#   options: <the options needed for this command> (array of command_option)
+#
+#   <command_option>:
+#     id: <the id of the option>
+#     name: <the name of the option wich will be displayed bold on the left> (string)
+#     description <the description of the option wich will be displayed on the right> (right)
+#     required: <whether it's mandatory to input the option before sending> (true/false)
+#     type: <what type of data can be inputted in this option> (application_command_option_type)
+#
+#     <application_command_option_type>:
+#       Subcommand: 1
+#       SubcommandGroup: 2
+#       String: 3
+#       Integer: 4
+#       Boolean: 5
+#       User: 6
+#       Channel: 7
+#       Role: 8
+#       Mentionable: 9
+#       Number: 10
+#       Attachment: 11
+# 
+# __________________________________________________
+
+
+ping:
+  description: "Ping the bot"
