@@ -3,6 +3,8 @@ const fs = require("fs");
 
 const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
 
+global.bot_color = "#0c5493";
+
 const client = new Client({
     intents: [GatewayIntentBits.Guilds]
 });
@@ -21,7 +23,15 @@ function initEvents() {
         for(const eventFile of eventFiles) {
             const eventClass = require(eventFile);
             const eventObject = new eventClass(client);
-            client.on(eventObject.id, (...args) => eventObject.run(client, ...args));
+            client.on(eventObject.id, (...args) => handleEvent(client, eventObject, ...args));
         }
+    }
+}
+
+async function handleEvent(client, eventObject, ...args) {
+    try {
+        await eventObject.run(client, ...args);
+    } catch (err) {
+        console.log("Errore");
     }
 }

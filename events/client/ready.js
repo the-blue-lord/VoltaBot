@@ -32,9 +32,7 @@ async function initCommands(client) {
         });
     });
 
-    await client.application.commands.set([]);
-
-    const guild = client.guilds.cache.get("1296459034219647001");
+    const guild = client.guilds.cache.get(process.env.GUILD_ID);
     if(!guild) return console.log("Guild not found");
 
     await guild.commands.set(commands.map(c => c.getData()));
