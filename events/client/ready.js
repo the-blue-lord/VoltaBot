@@ -1,10 +1,12 @@
 const fs = require("fs");
 
+const { Events } = require("discord.js");
+
 const VoltaEvent = require("../../structures/VoltaEvent");
 
-module.exports = class ReadyEvent extends VoltaEvent {
+module.exports = class ClientReadyEvent extends VoltaEvent {
     constructor(client) {
-        super(client, "ready");
+        super(client, Events.ClientReady);
     }
 
     async run() {
