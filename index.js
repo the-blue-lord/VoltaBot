@@ -2,6 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 
 const { Client, GatewayIntentBits, Partials } = require("discord.js");
+const { Events } = require("discord.js");
 
 global.bot_color = "#0c5493";
 
@@ -10,16 +11,22 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent 
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildVoiceStates
     ],
     partials: [
         Partials.Message,
         Partials.Channel,
-        Partials.Reaction
+        Partials.Reaction,
+        Partials.GuildMember
     ]
 });
 
 client.login(process.env.TOKEN);
+
+client.on("raw", (packet) => {
+    console.log(packet.t);
+});
 
 initEvents();
 
@@ -42,6 +49,6 @@ async function handleEvent(client, eventObject, ...args) {
     try {
         await eventObject.run(client, ...args);
     } catch (err) {
-        console.log("Errore");
+        console.log(err);
     }
 }
