@@ -32,3 +32,6 @@
 
 ping:
   description: "Ping the bot"
+
+send-request-message:
+  description: "Send message to make the user request a change"
