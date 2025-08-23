@@ -4,7 +4,6 @@
 # 
 # <command name>:
 #   description: <the description of the command> (string)
-#   test: <whether the command should be shown or not> (false/true)
 #   options: <the options needed for this command> (array of command_option)
 #
 #   <command_option>:
@@ -30,8 +29,82 @@
 # __________________________________________________
 
 
-ping:
-  description: "Ping the bot"
+info-membro:
+  description: "Richiedi informazioni riguardo ad un membro"
+  options:
+  - id: "member"
+    name: "membro"
+    description: "il membro del quale desideri ricevere informazioni"
+    required: true
+    type: 6
+
+registra-membro:
+  description: "Registra un membro"
+  options:
+  - id: "member"
+    name: "membro"
+    description: "il membro da registrare"
+    required: true
+    type: 6
 
 send-request-message:
   description: "Send message to make the user request a change"
+
+ping:
+  description: "Ping the bot"
+
+classe:
+  description: "Richiedi di essere inserito in uno specifico anno"
+  options:
+  - id: "class"
+    name: "classe"
+    description: "seleziona il ruolo con la parola \"Classe\" seguita dall'anno in cui è prevista la tua maturità"
+    required: true
+    type: 8
+
+nome:
+  description: "Richiedi di impostare il tuo nome"
+  options:
+  - id: "name"
+    name: "nome"
+    description: "inserisci il tuo nome"
+    required: true
+    type: 3
+  - id: "surname"
+    name: "cognome"
+    description: "inserisci il tuo cognome"
+    required: true
+    type: 3
+
+regitrami:
+  description: "Verrà inviata una richiesta di registrzione agli admin, i quali, dopo aver effettivamente verificat la tua identià, la accetteranno o la rifiuteranno"
+  options:
+  - id: "name"
+    name: "nome"
+    description: "inserisci il tuo nome"
+    required: true
+    type: 3
+  - id: "surname"
+    name: "cognome"
+    description: "inserisci il tuo cognome"
+    required: true
+    type: 3
+  - id: "class"
+    name: "classe"
+    description: "seleziona il ruolo con la parola \"Classe\" seguita dall'anno in cui è prevista la tua maturità (\"Classe2026\")"
+    required: true
+    type: 3
+  - id: "section"
+    name: "sezione"
+    description: "seleziona il ruolo con la parola \"Sezione\" seguita dalla lettera maiuscola della tua sezione (es. \"SezioneA\")"
+    required: true
+    type: 3
+
+sezione:
+  description: "Richiedi di essere inserito in una specifica sezione"
+  options:
+  - id: "section"
+    name: "sezione"
+    description: "seleziona il ruolo con la lettera della tua sezione"
+    required: true
+    type: 8

@@ -45,7 +45,8 @@ async function send(client, title, message, interaction_reply = { embeds: [defau
     return notification;
 }
 
-async function commandRun(client, command_name, user_id, channel_id, reply_message = { embeds: [default_embed]}) {
+async function commandRun(client, command_name, user_id, channel_id, reply_message = {embeds: [default_embed]}) {
+    if(!reply_message) reply_message = {embeds: [default_embed]};
     const title = "Comando eseguito";
     const message = `<@${user_id}> ha eseguito il comando **\`/${command_name}\`** in <#${channel_id}>`
 
