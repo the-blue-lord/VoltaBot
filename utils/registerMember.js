@@ -3,9 +3,11 @@ const db = require("../data/database");
 module.exports = async (member, name, class_role, section_role) => {
     const userRow = db.prepare("SELECT * FROM Users WHERE user_id = ?").get(member.id);
 
+    console.log(userRow);
+
     if(userRow) return null;
         
-    db.prepare("INSERT INTO Users (user_id, name) VALUES (?, ?)").run(member.id, name);
+    db.prepare("INSERT INTO Users (user_id, full_name) VALUES (?, ?)").run(member.id, name);
 
     const member_role = process.env.MEMBER_ROLE;
 
@@ -16,4 +18,6 @@ module.exports = async (member, name, class_role, section_role) => {
     for (const r of sectionRoles.values()) await member.roles.remove(r).catch(() => {});
     await member.roles.add(class_role);
     await member.roles.add(section_role);
+
+    return true;
 };

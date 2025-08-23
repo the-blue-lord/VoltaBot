@@ -87,7 +87,7 @@ module.exports = class InteractionCreateEvent extends VoltaEvent {
 
                 return;
             }
-            else if(custom_id == "register_member") {
+            else if(custom_id.startsWith("register_member")) {
                 const message_description = await interaction.message.embeds[0].description;
 
                 const regex = /^Nome:\s(.+)\nAnno:\s<@&(\d+)>\nSezione:\s<@&(\d+)>$/;
@@ -102,7 +102,7 @@ module.exports = class InteractionCreateEvent extends VoltaEvent {
                 const class_id = match[2];
                 const section = match[3];
 
-                registerMember(interaction.member, full_name, class_id, section);
+                await registerMember(interaction.member, full_name, class_id, section);
 
                 disableButtons(interaction.message);
 
@@ -113,7 +113,7 @@ module.exports = class InteractionCreateEvent extends VoltaEvent {
 
                 return;
             }
-            else if(custom_id.startsWith("no_class") || custom_id.startsWith("no_section") || custom_id.startsWith("no_name") || custom_id == "no_register_member") {
+            else if(custom_id.startsWith("no_class") || custom_id.startsWith("no_section") || custom_id.startsWith("no_name") || custom_id.startsWith("no_register_member")) {
                 const member_id = custom_id.split("-")[1];
 
                 disableButtons(interaction.message);

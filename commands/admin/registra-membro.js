@@ -1,3 +1,4 @@
+const { MessageFlags } = require("discord.js");
 const VoltaCommand = require("../../structures/VoltaCommand");
 const registerMember = require("../../utils/registerMember");
 
@@ -20,6 +21,8 @@ module.exports = class RegistraMembroCommand extends VoltaCommand {
         const class_role = interaction.options?.getRole("classe");
         const section_role = interaction.options?.getRole("sezione");
 
+        const member = interaction.options?.getMember("membro");
+
         if(!/^Classe\d{4}$/.test(class_role.name)) return await interaction.reply({
             content: "Non fare il furbetto, il ruolo che selezioni deve essere quello di uno specifico anno",
             flags: MessageFlags.Ephemeral
@@ -30,6 +33,16 @@ module.exports = class RegistraMembroCommand extends VoltaCommand {
             flags: MessageFlags.Ephemeral
         });
 
-        registerMember(interaction.member, full_name, class_role, section_role);
+        const res = await registerMember(member, full_name, class_role, section_role);
+
+        if(!res) return await interaction.reply({
+            content: "Non è stato possibile registrare il membro, probabilmente il membro è già stato registrato",
+            flags: MessageFlags.Ephemeral
+        });
+
+        interaction.reply({
+            content: "Membro registrato con successo",
+            flags: MessageFlags.Ephemeral
+        });
     }
 };

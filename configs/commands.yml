@@ -46,6 +46,26 @@ registra-membro:
     description: "il membro da registrare"
     required: true
     type: 6
+  - id: "name"
+    name: "nome"
+    description: "inserisci il tuo nome"
+    required: true
+    type: 3
+  - id: "surname"
+    name: "cognome"
+    description: "inserisci il tuo cognome"
+    required: true
+    type: 3
+  - id: "class"
+    name: "classe"
+    description: "il ruolo con la parola \"Classe\" seguita dall'anno in cui è prevista la tua maturità (\"Classe2026\")"
+    required: true
+    type: 8
+  - id: "section"
+    name: "sezione"
+    description: "il ruolo con la parola \"Sezione\" seguita dalla lettera della tua sezione (es. \"SezioneA\")"
+    required: true
+    type: 8
 
 send-request-message:
   description: "Send message to make the user request a change"
@@ -76,8 +96,11 @@ nome:
     required: true
     type: 3
 
-regitrami:
-  description: "Verrà inviata una richiesta di registrzione agli admin, i quali, dopo aver effettivamente verificat la tua identià, la accetteranno o la rifiuteranno"
+profilo:
+  description: "Visualizza il tuo profilo sul server"
+
+registrami:
+  description: "Verrà inviata una richiesta di registrzione agli admin"
   options:
   - id: "name"
     name: "nome"
@@ -91,14 +114,14 @@ regitrami:
     type: 3
   - id: "class"
     name: "classe"
-    description: "seleziona il ruolo con la parola \"Classe\" seguita dall'anno in cui è prevista la tua maturità (\"Classe2026\")"
+    description: "il ruolo con la parola \"Classe\" seguita dall'anno in cui è prevista la tua maturità (\"Classe2026\")"
     required: true
-    type: 3
+    type: 8
   - id: "section"
     name: "sezione"
-    description: "seleziona il ruolo con la parola \"Sezione\" seguita dalla lettera maiuscola della tua sezione (es. \"SezioneA\")"
+    description: "il ruolo con la parola \"Sezione\" seguita dalla lettera della tua sezione (es. \"SezioneA\")"
     required: true
-    type: 3
+    type: 8
 
 sezione:
   description: "Richiedi di essere inserito in una specifica sezione"

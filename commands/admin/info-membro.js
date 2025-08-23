@@ -1,4 +1,4 @@
-const { MessageFlags } = require("discord.js");
+const { MessageFlags, EmbedBuilder } = require("discord.js");
 const db = require("../../data/database");
 const VoltaCommand = require("../../structures/VoltaCommand");
 
@@ -15,13 +15,23 @@ module.exports = class InfoMembroCommand extends VoltaCommand {
             });
         }
         
-        const member = interaction.options.getMember("member");
+        const member = interaction.options.getMember("membro");
 
-        const memberRow = db.prepare("SELECT * FROM members WHERE id = ?").get(member.id);
+        const memberRow = db.prepare("SELECT * FROM Users WHERE user_id = ?").get(member.id);
+
+        if(!memberRow) {
+            interaction.reply({
+                content: "L'utente richiesto non risulta essere registrato",
+                flags: MessageFlags.Ephemeral
+            });
+
+            return;
+        }
+
         const name = memberRow.full_name;
 
-        const class_id = member.roles.cache.find(role => role.name.startsWith("Class")).id;
-        const section = member.roles.cache.find(role => role.name.startsWith("Section")).id;
+        const class_id = member.roles.cache.find(role => role.name.startsWith("Classe")).id;
+        const section = member.roles.cache.find(role => role.name.startsWith("Sezione")).id;
 
         const embed = new EmbedBuilder()
             .setTitle("Informazioni sul membro")

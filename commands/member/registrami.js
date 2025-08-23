@@ -9,11 +9,13 @@ module.exports = class RegistramiCommand extends VoltaCommand {
     }
 
     async run(client, interaction) {
+        const member = interaction.member;
+
         const userRow = db.prepare("SELECT * FROM Users WHERE user_id = ?").get(member.id);
 
         if(userRow) return await interaction.reply({
             content: `Risulti già registrato nel server.\n
-                Per visualizare il tuo profilo sul server esegui il comando `/profilo`.\n
+                Per visualizare il tuo profilo sul server esegui il comando \`/profilo\`.\n
                 Per modificarlo invece puoi eseguire uno dei seguenti comandi:\n
                 - Per cambiare **nome** esegui in una qualunque chat il comando \`/nome\`\n
                 - Per cambiare **classe** esegui in una qualunque chat il comando \`/classe\`\n
@@ -54,20 +56,20 @@ module.exports = class RegistramiCommand extends VoltaCommand {
 
         const embed = new EmbedBuilder()
             .setTitle("Richiesta di accettazione nel server")
-            .setDescription(`Nome: ${name}\nAnno: <@&${class_id}>\nSezione: <@&${section}>`)
+            .setDescription(`Nome: ${full_name}\nAnno: <@&${class_role.id}>\nSezione: <@&${section_role.id}>`)
             .setColor("Red")
             .setTimestamp()
             .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
             .setFooter({ text: "VoltaBot", iconURL: client.user.displayAvatarURL() });
             
         const approve_button = new ButtonBuilder()
-            .setCustomId(`register_member`)
+            .setCustomId(`register_member-${member.id}`)
             .setLabel("Approva")
             .setStyle(ButtonStyle.Success)
             .setEmoji("✔");
 
         const reject_button = new ButtonBuilder()
-            .setCustomId(`no_register_member`)
+            .setCustomId(`no_register_member-${member.id}`)
             .setLabel("Rifiuta")
             .setStyle(ButtonStyle.Danger)
             .setEmoji("✖");
